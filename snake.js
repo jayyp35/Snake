@@ -8,10 +8,6 @@ function init() {
     cs =500/15
     snake = {
         init_length: 5,
-        headX:0,
-        headY:0,
-        tailX:5,
-        tailY:0,
         color: "blue",
         direction: "right",
         cells:[],
@@ -29,6 +25,12 @@ function init() {
             
         },
         updateSnake : function() {
+            
+            if((this.cells[this.init_length - 1].x == food.x) &&
+                (this.cells[this.init_length - 1].y == food.y)) {
+                    getRandomFood();
+                }
+
             if(this.direction == 'right') {
                 
                 var X = this.cells[this.init_length - 1].x + 1;
@@ -55,6 +57,8 @@ function init() {
                 let cell = this.cells.shift();
                 this.cells.push({x:X,y:Y})
             }
+
+
         },
     }
 
@@ -69,6 +73,7 @@ function init() {
             snake.direction = "down"
     }
     snake.createSnake();
+    getRandomFood();
     document.addEventListener("keydown",keyPressed)
 }
 
@@ -76,6 +81,10 @@ function init() {
 function draw() {
     pen.clearRect(0,0,w,h)
     snake.drawSnake();
+    
+    food_image = new Image();
+    food_image.src = './resources/food.jpg';
+    pen.drawImage(food_image,(food.x)*cs,(food.y)*cs)
 }
 
 function update() {
@@ -83,12 +92,26 @@ function update() {
     
 }
 
+function getRandomFood() {
+    var foodX = Math.floor(Math.random()*(w-cs)/cs)
+    var foodY = Math.floor(Math.random()*(w-cs)/cs)
+
+    food = {
+        x:foodX,
+        y:foodY,
+    }
+    return food
+}
+
 function gameloop() {
     cellx = snake.cells[snake.init_length - 1].x
     celly = snake.cells[snake.init_length - 1].y
+    
     if( ((cellx+1)*(cs) >= 500) || (((cellx+0)*cs) <= 0)
         ||(((celly+1)*cs) >= 500) || ((celly)*(cs) < 0) )
         clearInterval(f)
+    
+    
     draw();
     update();
 }

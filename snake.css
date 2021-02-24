@@ -1,0 +1,12 @@
+#mycanvas {
+   box-sizing: content-box;
+   background-image: url("./resources/board-small.jpg");
+   border : 10px solid #4a3933; 
+   /* border-radius: 15px;  */
+   transition: all;
+   transition-duration: 1s; 
+}
+/* #mycanvas:hover {
+    border : 10px solid #2e1444;
+ } */
+

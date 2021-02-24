@@ -28,6 +28,22 @@ function init() {
             })
             
         },
+        updateSnake : function() {
+            if(this.direction == 'right') {
+                
+                var X = this.cells[this.init_length - 1].x + 1;
+                var Y = this.cells[this.init_length - 1].y;
+                let cell = this.cells.shift();
+                this.cells.push({x:X,y:Y})
+                console.log(this.cells);
+            }
+            else if(this.direction == 'down'){
+                var X = this.cells[this.init_length - 1].x;
+                var Y = this.cells[this.init_length - 1].y + 1;
+                let cell = this.cells.shift();
+                this.cells.push({x:X,y:Y})
+            }
+        },
     }
 
     function keyPressed(e) {

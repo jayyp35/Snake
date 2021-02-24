@@ -5,7 +5,7 @@ function init() {
     pen = canvas.getContext('2d')
     w = 500
     h = 500
-    cs =33
+    cs =500/15
     snake = {
         init_length: 5,
         headX:0,

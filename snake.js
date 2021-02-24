@@ -20,7 +20,7 @@ function init() {
             console.log("drawing",this.cells);
             pen.fillStyle = "#f0a500";
             this.cells.forEach((data,index) => {
-                pen.fillRect(cs*(data.x),cs*(data.y),cs-1,cs-1)
+                pen.fillRect(cs*(data.x),cs*(data.y),cs,cs)
             })
             
         },
@@ -31,33 +31,25 @@ function init() {
                     getRandomFood();
                     
                 }
+            
+            var X = this.cells[this.init_length - 1].x    
+            var Y = this.cells[this.init_length - 1].y
+            this.cells.shift()
 
-            if(this.direction == 'right') {
-                
-                var X = this.cells[this.init_length - 1].x + 1;
-                var Y = this.cells[this.init_length - 1].y;
-                let cell = this.cells.shift();
-                this.cells.push({x:X,y:Y})
-                
+            if(this.direction == 'right') { 
+                X = X + 1; 
             }
             else if(this.direction == 'down'){
-                var X = this.cells[this.init_length - 1].x;
-                var Y = this.cells[this.init_length - 1].y + 1;
-                let cell = this.cells.shift();
-                this.cells.push({x:X,y:Y})
+                Y = Y + 1;  
             }
             else if(this.direction == 'left'){
-                var X = this.cells[this.init_length - 1].x - 1;
-                var Y = this.cells[this.init_length - 1].y;
-                let cell = this.cells.shift();
-                this.cells.push({x:X,y:Y})
+                X = X - 1;  
             }
-            else if(this.direction == 'up'){
-                var X = this.cells[this.init_length - 1].x;
-                var Y = this.cells[this.init_length - 1].y-1;
-                let cell = this.cells.shift();
-                this.cells.push({x:X,y:Y})
+            else if(this.direction == 'up'){  
+                Y = Y - 1;
             }
+
+            this.cells.push({x:X,y:Y}) 
 
 
         },
@@ -108,8 +100,8 @@ function gameloop() {
     cellx = snake.cells[snake.init_length - 1].x
     celly = snake.cells[snake.init_length - 1].y
     
-    if( ((cellx+1)*(cs) >= 500) || (((cellx+0)*cs) <= 0)
-        ||(((celly+1)*cs) >= 500) || ((celly)*(cs) < 0) )
+    if( ((cellx)*(cs) > 500) || (((cellx+0)*cs) < 0)
+        ||(((celly)*cs) > 500) || ((celly)*(cs) < 0) )
         clearInterval(f)
     
     

@@ -29,6 +29,19 @@ function init() {
             
         },
     }
+
+    function keyPressed(e) {
+        if(e.keyCode == 37)
+            snake.direction = "left"
+        else if(e.keyCode == 38)
+            snake.direction = "up"
+        else if(e.keyCode == 39)
+            snake.direction = "right"          
+        else if(e.keyCode == 40)
+            snake.direction = "down"
+    }
+    snake.createSnake();
+    document.addEventListener("keydown",keyPressed)
 }
 
 

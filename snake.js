@@ -37,10 +37,10 @@ function init() {
             this.cells.shift()
 
             if(this.direction == 'right') { 
-                X = X + 1; 
+                X = X + 1;
             }
             else if(this.direction == 'down'){
-                Y = Y + 1;  
+                Y = Y + 1; 
             }
             else if(this.direction == 'left'){
                 X = X - 1;  

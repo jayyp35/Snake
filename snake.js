@@ -43,6 +43,18 @@ function init() {
                 let cell = this.cells.shift();
                 this.cells.push({x:X,y:Y})
             }
+            else if(this.direction == 'left'){
+                var X = this.cells[this.init_length - 1].x - 1;
+                var Y = this.cells[this.init_length - 1].y;
+                let cell = this.cells.shift();
+                this.cells.push({x:X,y:Y})
+            }
+            else if(this.direction == 'up'){
+                var X = this.cells[this.init_length - 1].x;
+                var Y = this.cells[this.init_length - 1].y-1;
+                let cell = this.cells.shift();
+                this.cells.push({x:X,y:Y})
+            }
         },
     }
 
@@ -78,4 +90,4 @@ function gameloop() {
 init();
 
 
-var f = setInterval(gameloop, 100);
+var f = setInterval(gameloop, 1000);

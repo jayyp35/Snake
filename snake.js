@@ -86,8 +86,8 @@ function update() {
 function gameloop() {
     cellx = snake.cells[snake.init_length - 1].x
     celly = snake.cells[snake.init_length - 1].y
-    if( (((cellx+1)*cs) >= 500) || (((cellx+0)*cs) <= 0)
-        ||(((celly+1)*cs) >= 500) || (((celly+1)*cs) <= 0) )
+    if( ((cellx+1)*(cs) >= 500) || (((cellx+0)*cs) <= 0)
+        ||(((celly+1)*cs) >= 500) || ((celly)*(cs) < 0) )
         clearInterval(f)
     draw();
     update();

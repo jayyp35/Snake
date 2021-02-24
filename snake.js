@@ -7,7 +7,7 @@ function init() {
     h = 500
     cs =250/15
     snake = {
-        init_length: 4,
+        init_length: 5,
         color: "blue",
         direction: "right",
         cells:[],
@@ -19,13 +19,20 @@ function init() {
         drawSnake: function() {
             console.log("drawing",this.cells);
             pen.fillStyle = "#f0a500";
-            this.cells.forEach((data,index) => {
-                pen.fillRect(this.cells[index].x * cs,this.cells[index].y * cs,cs+1,cs+1)
-            })
+            if(this.direction == "right" || this.direction == "left") {
+                this.cells.forEach((data,index) => {
+                    pen.fillRect((this.cells[index].x * cs),(this.cells[index].y * cs),cs,cs)
+                })
+            }else{
+                this.cells.forEach((data,index) => {
+                    pen.fillRect((this.cells[index].x * cs),(this.cells[index].y * cs),cs,cs)
+                })
+            }
+            
             
         },
         updateSnake : function() {
-            var X = this.cells[0].x    
+            var X = this.cells[0].x     
             var Y = this.cells[0].y
 
             if((this.cells[0].x == food.x) &&
@@ -69,9 +76,22 @@ function init() {
         else if(e.keyCode == 40)
             snake.direction = "down"
     }
+    
     snake.createSnake();
     getRandomFood();
     document.addEventListener("keydown",keyPressed)
+    document.addEventListener("swiped-left",()=> {
+        snake.direction = "left"
+    })
+    document.addEventListener("swiped-right",() => {
+        snake.direction = "right"
+    })
+    document.addEventListener("swiped-down",() => {
+        snake.direction = "down"
+    })
+    document.addEventListener("swiped-up",()=> {
+        snake.direction = "up"
+    })
 }
 
 
@@ -80,7 +100,7 @@ function draw() {
     snake.drawSnake();
     
     food_image = new Image();
-    food_image.src = './resources/food.jpg';
+    food_image.src = './resources/food2.jpg';
     pen.drawImage(food_image,(food.x)*cs,(food.y)*cs)
 }
 
@@ -90,8 +110,8 @@ function update() {
 }
 
 function getRandomFood() {
-    var foodX = Math.floor(Math.random()*(w-cs)/cs)
-    var foodY = Math.floor(Math.random()*(w-cs)/cs)
+    var foodX = Math.floor((Math.random()*(w-cs)/cs))
+    var foodY = Math.floor((Math.random()*(w-cs)/cs))
 
     food = {
         x:foodX,

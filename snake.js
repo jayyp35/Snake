@@ -74,13 +74,13 @@ function init() {
     }
 
     function keyPressed(e) {
-        if(e.keyCode == 37)
+        if(e.keyCode == 37 && snake.direction!="right")
             snake.direction = "left"
-        else if(e.keyCode == 38)
+        else if(e.keyCode == 38 && snake.direction!="down")
             snake.direction = "up"
-        else if(e.keyCode == 39)
+        else if(e.keyCode == 39 && snake.direction!="left")
             snake.direction = "right"          
-        else if(e.keyCode == 40)
+        else if(e.keyCode == 40 && snake.direction!="up")
             snake.direction = "down"
     }
     

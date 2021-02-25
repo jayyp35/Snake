@@ -7,7 +7,7 @@ function init() {
     h = 500
     cs =250/15
     snake = {
-        init_length: 5,
+        init_length: 8,
         color: "blue",
         direction: "right",
         cells:[],
@@ -17,7 +17,7 @@ function init() {
             }
         },
         drawSnake: function() {
-            console.log("drawing",this.cells);
+            
             pen.fillStyle = "#f0a500";
             if(this.direction == "right" || this.direction == "left") {
                 this.cells.forEach((data,index) => {
@@ -32,6 +32,7 @@ function init() {
             
         },
         updateSnake : function() {
+            cut = false;
             var X = this.cells[0].x     
             var Y = this.cells[0].y
 
@@ -60,6 +61,12 @@ function init() {
                 nY = Y-1;
             }
 
+            this.cells.forEach((data,index) => {
+                if(data.x == nX && data.y == nY)
+                    clearInterval(f)
+                
+            })
+
             this.cells.unshift({x:nX,y:nY}) 
 
 
@@ -80,6 +87,7 @@ function init() {
     snake.createSnake();
     getRandomFood();
     document.addEventListener("keydown",keyPressed)
+    
     document.addEventListener("swiped-left",()=> {
         snake.direction = "left"
     })
